@@ -1,0 +1,41 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  # 1. LAYANAN WEB SERVER (PHP & Apache)
+  web:
+    build: . 
+    container_name: weather-web
+    ports:
+      - "80:80" # Akses dashboard dari http://localhost
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    # Mengarahkan root URL ke folder public
+    working_dir: /var/www/html/public 
+    
+  # 2. LAYANAN DATABASE (MariaDB/MySQL)
+  db:
+    image: mariadb:10.6 
+    container_name: weather-db
+    environment:
+      MYSQL_ROOT_PASSWORD: your_strong_root_password 
+      MYSQL_DATABASE: weather 
+      MYSQL_USER: YOUR_DB_USER 
+      MYSQL_PASSWORD: YOUR_DB_PASSWORD 
+    volumes:
+      - db_data:/var/lib/mysql 
+      - ./db.sql:/docker-entrypoint-initdb.d/init.sql 
+  worker:
+    build: .
+    container_name: weather-mqtt-worker
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    command: ["php", "worker/mqtt_subscriber.php"] 
+    restart: always
+volumes:
+  db_data:
