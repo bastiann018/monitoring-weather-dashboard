@@ -1,0 +1,15 @@
+# File Konfigurasi Sensitif
+# Ini sangat penting karena berisi password database dan MQTT
+config.php
+
+# Direktori Vendor/Library (Jika diinstal via Composer/paket)
+/vendor/
+
+# File Log atau Cache
+*.log
+*.tmp
+/cache/
+
+# File Database Lokal (Opsional, kamu hanya ingin db.sql yang sudah bersih)
+*.sqlite
+*.mdb
