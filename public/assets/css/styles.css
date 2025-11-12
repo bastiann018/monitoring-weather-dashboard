@@ -3,6 +3,10 @@
   --muted:#6b7280; --shadow:0 10px 24px rgba(15,23,42,.06); --radius:16px;
   --brand:#0ea5e9; --ok:#22c55e; --warn:#f59e0b; --info:#3b82f6; --dark:#374151;
 }
+/* Tambahkan smooth scroll untuk transisi tautan jangkar */
+html {
+  scroll-behavior: smooth; 
+}
 *{box-sizing:border-box}
 body{margin:0;background:radial-gradient(1200px 600px at 20% -10%, var(--bg-2),transparent),var(--bg-1);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--text)}
 .app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
@@ -27,3 +31,74 @@ th{color:#6b7280;text-align:left}
 .span-2{grid-column:span 2}.span-3{grid-column:span 3}.span-6{grid-column:span 6}
 .select{padding:10px;border:1px solid var(--border);border-radius:10px;width:100%;max-width:320px}
 @media(max-width:1024px){.app{grid-template-columns:1fr}.sidebar{position:sticky;top:0}}
+
+/* --- TAMBAHAN HISTORY & PAGINATION --- */
+
+/* Membuat font tabel lebih seragam */
+table th, table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+/* Header Tabel */
+.table-header {
+  display: flex;
+  justify-content: space-between; /* Pisahkan judul dan tombol */
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* Tombol Export */
+.action-buttons {
+  display: flex;
+  gap: 8px; /* Jarak antar tombol */
+}
+
+.btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: none; /* Hilangkan border */
+}
+
+.btn-excel {
+  background-color: var(--ok); /* Hijau dari --ok */
+  color: white;
+}
+
+.btn-pdf {
+  background-color: var(--dark); /* Abu-abu gelap dari --dark */
+  color: white;
+}
+
+/* Styling untuk Pagination Footer */
+.table-footer-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  margin-top: 18px;
+  font-size: 14px;
+}
+
+.pagination-info {
+  color: var(--muted);
+}
+
+.pagination-buttons .btn {
+  padding: 6px 10px;
+}
+
+.pagination-buttons .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
